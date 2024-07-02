@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         쉘터 글 유튜브 링크
 // @namespace    shelter.id
-// @version      1.0.0
+// @version      1.1.0
 // @description  쉘터 글 유튜브에 연결된 링크 클릭시 유튜브 Embed 생성
 // @author       MaGyul
 // @match        *://shelter.id/*
@@ -27,6 +27,11 @@
         history.pushState = function(state, _, pathname) {
             main('history', pathname);
             return pushState.apply(history, arguments);
+        };
+        var replaceState = history.replaceState;
+        history.replaceState = function(state, _, pathname) {
+            main('history', pathname);
+            return replaceState.apply(history, arguments);
         };
     })(window.history);
 
