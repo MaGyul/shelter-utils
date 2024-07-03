@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         쉘터 글 유튜브 링크
 // @namespace    shelter.id
-// @version      1.1.1
+// @version      1.1.2
 // @description  쉘터 글 유튜브에 연결된 링크 클릭시 유튜브 Embed 생성
 // @author       MaGyul
 // @match        *://shelter.id/*
@@ -50,7 +50,7 @@
     }
 
     function patchYoutubeLink() {
-        findDom('.art_txt a[href]', true, (eles) => {
+        findDom('article.art_container .art_txt a[href*="youtu"]', true, (eles) => {
             for (let ele of eles) {
                 let href = undefined;
                 if (ele.href) {
