@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         쉘터 오른쪽 사이드바 가리기
 // @namespace    shelter.id
-// @version      1.0.1
+// @version      1.0.2
 // @description  오른쪽 사이드바를 접거나 펼칠 수 있습니다.
 // @author       MaGyul
 // @match        *://shelter.id/*
@@ -59,6 +59,17 @@
                 .mg-side-close { transform: rotateY(0deg); }
                 .mg-fullmode { grid-template-columns: 225px 1fr 0 !important; }
                 .mg-normal { grid-template-columns: 225px 0.65fr 0 !important; }
+                .main-content > .mc-banner > .status_settler > .right-side-btn {
+                     position: absolute;
+                     right: 0;
+                     top: 20px;
+                     background: transparent;
+                     color: currentColor;
+                     border: 1px solid currentColor;
+                     aspect-ratio: 1 / 1;
+                     padding-bottom: 4px !important;
+                     padding-top: 4px !important;
+                }
                 :where(.mg-normal, .mg-fullmode) > div:nth-child(3) { max-height: 0px; }
             }
             `;
@@ -75,6 +86,11 @@
         if (type == 'script-injected' || type == 'history') {
             setTimeout(() => {
                 findDom('.main__layout__container > .main__layout div.board__header.font-label > div.header-right', dom => {
+                    if (!dom.contains(btn)) {
+                        dom.appendChild(btn);
+                    }
+                });
+                findDom('.main-content > .mc-banner > .status_settler', dom => {
                     if (!dom.contains(btn)) {
                         dom.appendChild(btn);
                     }
