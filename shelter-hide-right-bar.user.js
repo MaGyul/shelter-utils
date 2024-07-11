@@ -15,12 +15,15 @@
 
 (function() {
     'use strict';
+
     const btn = createButton();
     const domCache = {};
 
-    const fullmode = GM_registerMenuCommand("꽉 찬 화면 토글", function() {
-        main('toggle-fullmode');
-    });
+    if (typeof GM_registerMenuCommand === 'function') {
+        GM_registerMenuCommand("꽉 찬 화면 토글", function() {
+            main('toggle-fullmode');
+        });
+    }
 
     (function(history){
         var pushState = history.pushState;
