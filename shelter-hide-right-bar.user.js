@@ -62,10 +62,10 @@
                 .main-content > .mc-banner > .status_settler > .right-side-btn {
                      position: absolute;
                      right: 0;
-                     top: 20px;
+                     top: 24px;
                      background: transparent;
                      color: currentColor;
-                     border: 1px solid currentColor;
+                     border: 2px solid currentColor;
                      aspect-ratio: 1 / 1;
                      padding-bottom: 4px !important;
                      padding-top: 4px !important;
