@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         쉘터 글 유튜브 링크
 // @namespace    shelter.id
-// @version      1.1.3
+// @version      1.1.4
 // @description  쉘터 글 유튜브에 연결된 링크 클릭시 유튜브 Embed 생성
 // @author       MaGyul
 // @match        *://shelter.id/*
@@ -90,7 +90,7 @@
 
     function addYoutubeEmbed(target, id) {
         let iframe = document.createElement('iframe');
-        iframe.src = `https://www.youtube-nocookie.com/embed/${id}`;
+        iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
         iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
         iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
         iframe.setAttribute('allowfullscreen', '');
