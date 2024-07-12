@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         쉘터 오른쪽 사이드바 가리기
 // @namespace    shelter.id
-// @version      1.0.2
+// @version      1.0.3
 // @description  오른쪽 사이드바를 접거나 펼칠 수 있습니다.
 // @author       MaGyul
 // @match        *://shelter.id/*
@@ -9,7 +9,6 @@
 // @updateURL    https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-hide-right-bar.user.js
 // @downloadURL  https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-hide-right-bar.user.js
 // @grant        GM_registerMenuCommand
-// @grant        GM_unregisterMenuCommand
 // @run-at       document-start
 // ==/UserScript==
 
