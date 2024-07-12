@@ -58,7 +58,7 @@
                 .right-side-btn { transform: rotateY(180deg); }
                 .mg-side-close { transform: rotateY(0deg); }
                 .mg-fullmode { grid-template-columns: 225px 1fr 0 !important; }
-                .mg-normal { grid-template-columns: 225px 0.65fr 0 !important; }
+                .mg-normal { grid-template-columns: 225px 0.7fr 0 !important; }
                 .main-content > .mc-banner > .status_settler > .right-side-btn {
                      position: absolute;
                      right: 0;
