@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         쉘터 글 유튜브 링크
 // @namespace    shelter.id
-// @version      1.1.5
+// @version      1.1.6
 // @description  쉘터 글 유튜브에 연결된 링크 클릭시 유튜브 Embed 생성
 // @author       MaGyul
 // @match        *://shelter.id/*
@@ -20,7 +20,7 @@
     };
 
     const modalReg = /\(modal:\w\/(\w+-?\w+)\/(\d+)\)/;
-    const youtubeReg = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/|live\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
+    const youtubeReg = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/|live\/|playlist)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
 
     (function(history){
         var pushState = history.pushState;
@@ -80,9 +80,13 @@
             let url = new URL(href);
             let match = href.match(youtubeReg);
             let id = match[1];
+            if (url.pathname.includes('playlist')) {
+                id = 'playlist';
+            }
             if (id) {
                 let t = url.searchParams.get('t') ?? url.searchParams.get('start') ?? '0';
-                addYoutubeEmbed(target.parentElement, id, t);
+                let list = url.searchParams.get('list');
+                addYoutubeEmbed(target.parentElement, id, t, list);
                 target.remove();
             } else {
                 open(href);
@@ -90,9 +94,13 @@
         }
     }
 
-    function addYoutubeEmbed(target, id, t) {
+    function addYoutubeEmbed(target, id, t, list) {
         let iframe = document.createElement('iframe');
-        iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&playsinline=1&start=${t}`;
+        let src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&playsinline=1&start=${t}`;
+        if (list) {
+            src += `&list=${list}`;
+        }
+        iframe.src = src;
         iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
         iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
         iframe.setAttribute('allowfullscreen', '');
