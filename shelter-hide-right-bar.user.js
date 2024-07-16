@@ -83,7 +83,7 @@
         }
 
         if (type == 'script-injected' || type == 'history') {
-            await wait(type == 'script-injected' ? 1500 : 1000);
+            await wait(1000);
             findDom('.main__layout__container > .main__layout div.board__header.font-label > div.header-right', dom => {
                 if (!dom.contains(btn)) {
                     dom.appendChild(btn);
@@ -96,6 +96,9 @@
             });
             if (!isSideBarOpen()) {
                 closeSideBar();
+            }
+            if (type == 'script-injected') {
+                main('history');
             }
         }
     }
