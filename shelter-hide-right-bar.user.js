@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         쉘터 오른쪽 사이드바 가리기
 // @namespace    shelter.id
-// @version      1.0.3
+// @version      1.0.4
 // @description  오른쪽 사이드바를 접거나 펼칠 수 있습니다.
 // @author       MaGyul
 // @match        *://shelter.id/*
@@ -34,7 +34,7 @@
         };
     })(window.history);
 
-    function main(type) {
+    async function main(type) {
         if (type == 'toggle-fullmode') {
             if (localStorage.getItem('mg-fullmode')) {
                 localStorage.removeItem('mg-fullmode');
@@ -83,21 +83,20 @@
         }
 
         if (type == 'script-injected' || type == 'history') {
-            setTimeout(() => {
-                findDom('.main__layout__container > .main__layout div.board__header.font-label > div.header-right', dom => {
-                    if (!dom.contains(btn)) {
-                        dom.appendChild(btn);
-                    }
-                });
-                findDom('.main-content > .mc-banner > .status_settler', dom => {
-                    if (!dom.contains(btn)) {
-                        dom.appendChild(btn);
-                    }
-                });
-                if (!isSideBarOpen()) {
-                    closeSideBar();
+            await wait(type == 'script-injected' ? 1500 : 1000);
+            findDom('.main__layout__container > .main__layout div.board__header.font-label > div.header-right', dom => {
+                if (!dom.contains(btn)) {
+                    dom.appendChild(btn);
                 }
-            }, 1000);
+            });
+            findDom('.main-content > .mc-banner > .status_settler', dom => {
+                if (!dom.contains(btn)) {
+                    dom.appendChild(btn);
+                }
+            });
+            if (!isSideBarOpen()) {
+                closeSideBar();
+            }
         }
     }
 
