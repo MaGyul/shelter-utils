@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         쉘터 글 유튜브 링크
 // @namespace    shelter.id
-// @version      1.1.6
+// @version      1.2.0
 // @description  쉘터 글 유튜브에 연결된 링크 클릭시 유튜브 Embed 생성
 // @author       MaGyul
 // @match        *://shelter.id/*
@@ -21,6 +21,8 @@
 
     const modalReg = /\(modal:\w\/(\w+-?\w+)\/(\d+)\)/;
     const youtubeReg = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/|live\/|playlist)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
+
+    const btns = [];
 
     (function(history){
         var pushState = history.pushState;
@@ -45,13 +47,50 @@
         }
 
         if (type == 'script-injected') {
+            initBtns();
             logger.info('쉘터 글 유튜브 링크 스크립트 준비 완료');
+        }
+    }
+
+    function initBtns() {
+        if (typeof GM_unregisterMenuCommand !== 'undefined' && btns.length != 0) {
+            btns.forEach(GM_unregisterMenuCommand);
+            btns.length = 0;
+        }
+        initAutoplayBtn();
+        initAutoloopBtn();
+    }
+
+    function initAutoplayBtn() {
+        if (typeof GM_registerMenuCommand !== 'undefined') {
+            let id = GM_registerMenuCommand(`자동 재생 ${isAutoplay() ? '켜짐' : '꺼짐'}`, function() {
+                setAutoplay(!isAutoplay());
+                initBtns();
+            }, {
+                autoClose: false,
+                title: `클릭시 자동 재생을 ${isAutoplay() ? '끕' : '켭'}니다.`
+            });
+            btns.push(id);
+        }
+    }
+
+    function initAutoloopBtn() {
+        if (typeof GM_registerMenuCommand !== 'undefined') {
+            let id = GM_registerMenuCommand(`자동 반복 ${isAutoloop() ? '켜짐' : '꺼짐'}`, function() {
+                setAutoloop(!isAutoloop());
+                initBtns();
+            }, {
+                autoClose: false,
+                title: `클릭시 자동 반복을 ${isAutoloop() ? '끕' : '켭'}니다.`
+            });
+            btns.push(id);
         }
     }
 
     function patchYoutubeLink() {
         findDom('article.art_container .art_txt a[href*="youtu"]', true, (eles) => {
             for (let ele of eles) {
+                if (ele.classList.contains('m-ypatch')) return;
                 let href = undefined;
                 if (ele.href) {
                     href = ele.href;
@@ -59,15 +98,29 @@
                     href = ele.getAttribute('href');
                 }
                 if (href && youtubeReg.test(href)) {
-                    ele.removeAllListeners('click');
-                    ele.addEventListener('click', youtubeLinkClick);
+                    let clone = ele.cloneNode(true);
+                    ele.style.display = "none";
+                    ele.classList.add('m-ypatch');
+                    ele.classList.add('m-original');
+                    clone.classList.add('m-ypatch');
+                    ele.parentElement.appendChild(clone);
+                    clone.addEventListener('click', (event) => youtubeLinkClick(event, ele));
                 }
             }
         });
     }
 
-    function youtubeLinkClick(event) {
+    function youtubeLinkClick(event, ori) {
         let target = event.target;
+        if (target.tagName != 'A') {
+            target = getDescendantByTag('A', target, 10);
+        }
+        if (!target) {
+            event.preventDefault();
+            logger.warn("유튜브 링크가 포함된 A 태그를 못 찾아 패치를 진행 할 수 없음");
+            ori.click();
+            return;
+        }
         let href = undefined;
         if (target.href) {
             href = target.href;
@@ -96,7 +149,7 @@
 
     function addYoutubeEmbed(target, id, t, list) {
         let iframe = document.createElement('iframe');
-        let src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&playsinline=1&start=${t}`;
+        let src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=${Number(isAutoplay())}&playsinline=1&start=${t}&loop=${Number(isAutoloop())}&playlist=${id}`;
         if (list) {
             src += `&list=${list}`;
         }
@@ -120,6 +173,50 @@
         }
         await wait(500);
         return findDom(path, all, callback);
+    }
+
+    function getDescendantByTag(parent, child, limit = 5) {
+        var node = child.parentNode;
+        while (node != null) {
+            if (node.tagName == parent) {
+                return node;
+            }
+            if (limit-- == 0) return false;
+            node = node.parentNode;
+        }
+        return undefined;
+    }
+
+    function isAutoplay() {
+        return getValue('m-autoplay', 'false') == 'true';
+    }
+
+    function setAutoplay(b) {
+        setValue('m-autoplay', String(b));
+    }
+
+    function isAutoloop() {
+        return getValue('m-autoloop', 'false') == 'true';
+    }
+
+    function setAutoloop(b) {
+        setValue('m-autoloop', String(b));
+    }
+
+    function setValue(k, v) {
+        if (typeof GM_setValue === 'undefined') {
+            localStorage.setItem(k, v);
+        } else {
+            return GM_setValue(k, v);
+        }
+    }
+
+    function getValue(k, d) {
+        if (typeof GM_getValue === 'undefined') {
+            return localStorage.getItem(k) ?? d;
+        } else {
+            return GM_getValue(k, d);
+        }
     }
 
     function wait(ms) {
