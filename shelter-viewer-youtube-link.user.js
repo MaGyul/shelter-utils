@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         쉘터 글 유튜브 링크
 // @namespace    shelter.id
-// @version      1.2.0
+// @version      1.2.1
 // @description  쉘터 글 유튜브에 연결된 링크 클릭시 유튜브 Embed 생성
 // @author       MaGyul
 // @match        *://shelter.id/*
@@ -111,24 +111,30 @@
     }
 
     function youtubeLinkClick(event, ori) {
-        let target = event.target;
-        if (target.tagName != 'A') {
-            target = getDescendantByTag('A', target, 10);
-        }
-        if (!target) {
-            event.preventDefault();
-            logger.warn("유튜브 링크가 포함된 A 태그를 못 찾아 패치를 진행 할 수 없음");
-            ori.click();
-            return;
-        }
-        let href = undefined;
-        if (target.href) {
-            href = target.href;
-        } else {
-            href = target.getAttribute('href');
-        }
+        try {
+            let target = event.target;
+            if (target.tagName != 'A') {
+                target = getDescendantByTag('A', target, 10);
+            }
+            if (!target) {
+                event.preventDefault();
+                logger.warn("유튜브 링크가 포함된 A 태그를 못 찾아 패치를 진행 할 수 없음");
+                ori.click();
+                return;
+            }
+            let href = undefined;
+            if (target.href) {
+                href = target.href;
+            } else {
+                href = target.getAttribute('href');
+            }
+            if (!href) {
+                event.preventDefault();
+                logger.warn("유튜브 링크를 못 찾아 패치를 진행 할 수 없음");
+                ori.click();
+                return;
+            }
 
-        if (href) {
             event.preventDefault();
             let url = new URL(href);
             let match = href.match(youtubeReg);
@@ -142,14 +148,23 @@
                 addYoutubeEmbed(target.parentElement, id, t, list);
                 target.remove();
             } else {
-                open(href);
+                logger.warn("유튜브 링크에서 Video ID를 못 찾아 패치를 진행 할 수 없음");
+                ori.click();
             }
+        } catch (err) {
+            event.preventDefault();
+            logger.error("유튜브 링크 패치도중 오류 발생");
+            logger.error(err);
+            ori.click();
         }
     }
 
     function addYoutubeEmbed(target, id, t, list) {
         let iframe = document.createElement('iframe');
-        let src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=${Number(isAutoplay())}&playsinline=1&start=${t}&loop=${Number(isAutoloop())}&playlist=${id}`;
+        let src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=${Number(isAutoplay())}&playsinline=1&start=${t}`;
+        if (isAutoloop()) {
+            src += `&loop=1&playlist=${id}`
+        }
         if (list) {
             src += `&list=${list}`;
         }
