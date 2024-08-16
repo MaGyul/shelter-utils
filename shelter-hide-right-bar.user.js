@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         쉘터 오른쪽 사이드바 가리기
 // @namespace    shelter.id
-// @version      1.0.5
+// @version      1.0.6
 // @description  오른쪽 사이드바를 접거나 펼칠 수 있습니다.
 // @author       MaGyul
 // @match        *://shelter.id/*
