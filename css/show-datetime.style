@@ -1,0 +1,7 @@
+div.ngx-ptr-content-container > app-search-box > div > div > input.sb-input { 
+    width: 100%;
+}
+
+div.board__header > div > button.btn-wider.smol.search-btn { 
+    display: block;
+}
