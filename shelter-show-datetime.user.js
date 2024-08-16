@@ -7,8 +7,8 @@
 // @match        *://shelter.id/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=shelter.id
 // @require      https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-utils.js
-// @updateURL    https://raw.githubusercontent.com/MaGyul/shelter-show-datetime/main/shelter.id.user.js
-// @downloadURL  https://raw.githubusercontent.com/MaGyul/shelter-show-datetime/main/shelter.id.user.js
+// @updateURL    https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-show-datetime.user.js
+// @downloadURL  https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-show-datetime.user.js
 // @grant        none
 // ==/UserScript==
 
@@ -59,7 +59,7 @@
 
                 ShelterUtils.getShelterId(pathname).then(async sid => {
                     if (sid != null && shelterId != sid) {
-                        logger.info('쉘터가 변경됨:', sid);
+                        (logger ?? console).info('쉘터가 변경됨:', sid);
                         shelterId = sid;
                         shelterOwnerId = await ShelterUtils.getOwnerId(sid);
                     }
