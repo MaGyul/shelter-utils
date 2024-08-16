@@ -79,12 +79,10 @@
                 }
             }
             if (limit-- == 0) {
-                // logger.warn('html 태그 찾기가 5회 이상 진행되었습니다.');
-                // logger.warn('5회 이상으로 태그가 없다고 판단되어 undefined가 반환됩니다.');
                 if (typeof callback === 'function') {
-                    callback(undefined);
+                    callback([]);
                 }
-                return undefined;
+                return [];
             }
             await wait(500);
             return this.findDomAll(path, callback, limit);
@@ -123,8 +121,6 @@
                 }
             }
             if (limit-- == 0) {
-                // logger.warn('html 태그 찾기가 5회 이상 진행되었습니다.');
-                // logger.warn('5회 이상으로 태그가 없다고 판단되어 undefined가 반환됩니다.');
                 if (typeof callback === 'function') {
                     callback(undefined);
                 }
