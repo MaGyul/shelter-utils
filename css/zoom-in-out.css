@@ -1,0 +1,16 @@
+.ref-scroll-container {
+    display: flex;
+}
+
+.ref-box, .ref-item:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.art_txt {
+    zoom: var(--noan-zoom);
+}
+
+app-modal-wrapper > app-shelter-modal-navigator > div > div.modal-ref-list > div.ref-scroll-container > input[type=range] {
+    margin-left: 10px;
+}
