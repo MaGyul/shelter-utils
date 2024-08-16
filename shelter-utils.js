@@ -197,7 +197,7 @@
         };
     }
 
-    window.addEventListener('load', () => {
+    (unsafe ?? window).shelterUtilsLoad = () => {
         (unsafe ?? window).ShelterUtils = ShelterUtils;
         (unsafe ?? window).su = ShelterUtils;
         
@@ -213,7 +213,9 @@
         if (document.head.contains(currentScript)) {
             document.head.removeChild(currentScript);
         }
-    });
+    }
+    window.removeEventListener('load', (unsafe ?? window).shelterUtilsLoad);
+    window.addEventListener('load', (unsafe ?? window).shelterUtilsLoad);
 
     (function(history){
         if (history.su_injected) return;
