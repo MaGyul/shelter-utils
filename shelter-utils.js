@@ -1,4 +1,5 @@
 ((window, unsafe) => {
+    if ((unsafe ?? window).su_injected) return;
     const currentScript = document.currentScript;
     (unsafe ?? window).domCache = {};
     (unsafe ?? window).loggerCache = {};
@@ -258,6 +259,6 @@
 
     (unsafe ?? window).ShelterUtils = ShelterUtils;
     (unsafe ?? window).su = ShelterUtils;
-    
+
     (unsafe ?? window).su_injected = true;
 })(window, typeof unsafeWindow === 'undefined' ? undefined : unsafeWindow);
