@@ -1,0 +1,23 @@
+@media only screen and (max-width: 1170px) {
+    .right-side-btn { display: none; }
+}
+
+@media only screen and (min-width: 1170px) {
+    .main__layout__container > .main__layout { transition: grid-template-columns 100ms ease-in-out; }
+    .right-side-btn { transform: rotateY(180deg); }
+    .mg-side-close { transform: rotateY(0deg); }
+    .mg-fullmode { grid-template-columns: 225px 1fr 0 !important; }
+    .mg-normal { grid-template-columns: 225px 0.7fr 0 !important; }
+    .main-content > .mc-banner > .status_settler > .right-side-btn {
+            position: absolute;
+            right: 0;
+            top: 24px;
+            background: transparent;
+            color: currentColor;
+            border: 2px solid currentColor;
+            aspect-ratio: 1 / 1;
+            padding-bottom: 4px !important;
+            padding-top: 4px !important;
+    }
+    :where(.mg-normal, .mg-fullmode) > div:nth-child(3) { max-height: 0px; }
+}

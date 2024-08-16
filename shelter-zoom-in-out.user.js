@@ -54,6 +54,7 @@
         if (type === 'script-injected') {
             if (typeof ShelterUtils === 'undefined') {
                 const script = document.createElement('script');
+                script.classList.add('shelter-utils');
                 script.textContent = await fetch('https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-utils.js').then(r => r.text());
                 document.body.appendChild(script);
             }

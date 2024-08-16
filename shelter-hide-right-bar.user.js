@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         쉘터 오른쪽 사이드바 가리기
 // @namespace    shelter.id
-// @version      1.0.4
+// @version      1.0.5
 // @description  오른쪽 사이드바를 접거나 펼칠 수 있습니다.
 // @author       MaGyul
 // @match        *://shelter.id/*
@@ -9,30 +9,27 @@
 // @updateURL    https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-hide-right-bar.user.js
 // @downloadURL  https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-hide-right-bar.user.js
 // @grant        GM_registerMenuCommand
-// @run-at       document-start
 // ==/UserScript==
 
 (function() {
     'use strict';
 
     const btn = createButton();
-    const domCache = {};
+
+    window.addEventListener('su-loaded', () => {
+        main('su-loaded', location.href);
+    });
+
+    window.addEventListener('history-push', (event) => {
+        const { pathname } = event.detail;
+        main('history', pathname);
+    })
 
     if (typeof GM_registerMenuCommand === 'function') {
         GM_registerMenuCommand("꽉 찬 화면 토글", function() {
             main('toggle-fullmode');
         });
     }
-
-    (function(history){
-        var pushState = history.pushState;
-        history.pushState = function() {
-            if (typeof history.onpushstate == "function") {
-                main('history');
-            }
-            return pushState.apply(history, arguments);
-        };
-    })(window.history);
 
     async function main(type) {
         if (type == 'toggle-fullmode') {
@@ -46,33 +43,8 @@
             }
         }
 
-        if (type == 'script-injected') {
-            let style = document.createElement('style');
-            style.textContent = `
-            @media only screen and (max-width: 1170px) {
-                .right-side-btn { display: none; }
-            }
-            @media only screen and (min-width: 1170px) {
-                .main__layout__container > .main__layout { transition: grid-template-columns 100ms ease-in-out; }
-                .right-side-btn { transform: rotateY(180deg); }
-                .mg-side-close { transform: rotateY(0deg); }
-                .mg-fullmode { grid-template-columns: 225px 1fr 0 !important; }
-                .mg-normal { grid-template-columns: 225px 0.7fr 0 !important; }
-                .main-content > .mc-banner > .status_settler > .right-side-btn {
-                     position: absolute;
-                     right: 0;
-                     top: 24px;
-                     background: transparent;
-                     color: currentColor;
-                     border: 2px solid currentColor;
-                     aspect-ratio: 1 / 1;
-                     padding-bottom: 4px !important;
-                     padding-top: 4px !important;
-                }
-                :where(.mg-normal, .mg-fullmode) > div:nth-child(3) { max-height: 0px; }
-            }
-            `;
-            document.head.appendChild(style);
+        if (type == 'su-loaded') {
+            ShelterUtils.appendStyle('hide-right-bar.style');
             btn.onclick = () => {
                 if (isSideBarOpen()) {
                     closeSideBar();
@@ -82,14 +54,16 @@
             }
         }
 
-        if (type == 'script-injected' || type == 'history') {
-            await wait(1000);
-            findDom('.main__layout__container > .main__layout div.board__header.font-label > div.header-right', dom => {
+        if (type == 'su-loaded' || type == 'history') {
+            await ShelterUtils.wait(1000);
+            ShelterUtils.findDom('.main__layout__container > .main__layout div.board__header.font-label > div.header-right', dom => {
+                if (!dom) return;
                 if (!dom.contains(btn)) {
                     dom.appendChild(btn);
                 }
             });
-            findDom('.main-content > .mc-banner > .status_settler', dom => {
+            ShelterUtils.findDom('.main-content > .mc-banner > .status_settler', dom => {
+                if (!dom) return;
                 if (!dom.contains(btn)) {
                     dom.appendChild(btn);
                 }
@@ -97,40 +71,19 @@
             if (!isSideBarOpen()) {
                 closeSideBar();
             }
-            if (type == 'script-injected') {
+            if (type == 'su-loaded') {
                 main('history');
             }
         }
-    }
 
-    async function findDom(path, callback) {
-        if (callback) {
-            if (domCache[path] && document.body.contains(domCache[path])) {
-                callback(domCache[path]);
-                return;
-            }
-            let dom = document.querySelector(path);
-            if (dom != null) {
-                domCache[path] = dom;
-                callback(dom);
-                return;
-            }
-        } else {
-            if (domCache[path] && document.body.contains(domCache[path])) {
-                return domCache[path];
-            }
-            let dom = document.querySelector(path);
-            if (dom != null) {
-                domCache[path] = dom;
-                return dom;
+        if (type === 'script-injected') {
+            if (typeof ShelterUtils === 'undefined') {
+                const script = document.createElement('script');
+                script.classList.add('shelter-utils');
+                script.textContent = await fetch('https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-utils.js').then(r => r.text());
+                document.body.appendChild(script);
             }
         }
-        await wait(500);
-        return findDom(path, callback);
-    }
-
-    function wait(ms) {
-        return new Promise((resolve) => setTimeout(resolve, ms));
     }
 
     function isSideBarOpen() {
@@ -138,7 +91,8 @@
     }
 
     function openSideBar() {
-        findDom('.main__layout__container > .main__layout', dom => {
+        ShelterUtils.findDom('.main__layout__container > .main__layout', dom => {
+            if (!dom) return;
             dom.classList.remove('mg-fullmode');
             dom.classList.remove('mg-normal');
         });
@@ -147,7 +101,8 @@
     }
 
     function closeSideBar() {
-        findDom('.main__layout__container > .main__layout', dom => {
+        ShelterUtils.findDom('.main__layout__container > .main__layout', dom => {
+            if (!dom) return;
             if (localStorage.getItem('mg-fullmode')) {
                 dom.classList.add('mg-fullmode');
                 dom.classList.remove('mg-normal');
