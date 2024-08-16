@@ -258,5 +258,6 @@
 
     (unsafe ?? window).ShelterUtils = ShelterUtils;
     (unsafe ?? window).su = ShelterUtils;
-
+    
+    (unsafe ?? window).su_injected = true;
 })(window, typeof unsafeWindow === 'undefined' ? undefined : unsafeWindow);
