@@ -1,4 +1,5 @@
 ((window) => {
+    const currentScript = document.currentScript;
     window.domCache = {};
     window.loggerCache = {};
     const logger = createLogger(console, 'shelter-utils');
@@ -78,8 +79,8 @@
                 }
             }
             if (limit-- == 0) {
-                logger.warn('html 태그 찾기가 5회 이상 진행되었습니다.');
-                logger.warn('5회 이상으로 태그가 없다고 판단되어 undefined가 반환됩니다.');
+                // logger.warn('html 태그 찾기가 5회 이상 진행되었습니다.');
+                // logger.warn('5회 이상으로 태그가 없다고 판단되어 undefined가 반환됩니다.');
                 if (typeof callback === 'function') {
                     callback(undefined);
                 }
@@ -122,8 +123,8 @@
                 }
             }
             if (limit-- == 0) {
-                logger.warn('html 태그 찾기가 5회 이상 진행되었습니다.');
-                logger.warn('5회 이상으로 태그가 없다고 판단되어 undefined가 반환됩니다.');
+                // logger.warn('html 태그 찾기가 5회 이상 진행되었습니다.');
+                // logger.warn('5회 이상으로 태그가 없다고 판단되어 undefined가 반환됩니다.');
                 if (typeof callback === 'function') {
                     callback(undefined);
                 }
@@ -212,6 +213,7 @@
         });
         
         window.dispatchEvent(loadedEvent);
+        document.body.removeChild(currentScript);
     });
 
     (function(history){
