@@ -213,6 +213,8 @@
         if (document.head.contains(currentScript)) {
             document.head.removeChild(currentScript);
         }
+        window.removeEventListener('load', (unsafe ?? window).shelterUtilsLoad);
+        delete (unsafe ?? window).shelterUtilsLoad;
     }
     window.removeEventListener('load', (unsafe ?? window).shelterUtilsLoad);
     window.addEventListener('load', (unsafe ?? window).shelterUtilsLoad);
