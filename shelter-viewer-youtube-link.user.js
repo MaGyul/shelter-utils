@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         쉘터 글 유튜브 링크
 // @namespace    shelter.id
-// @version      1.2.2
+// @version      1.2.3
 // @description  쉘터 글 유튜브에 연결된 링크 클릭시 유튜브 Embed 생성
 // @author       MaGyul
 // @match        *://shelter.id/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=shelter.id
+// @require      https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-utils.js
 // @updateURL    https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-viewer-youtube-link.user.js
 // @downloadURL  https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-viewer-youtube-link.user.js
 // @grant        GM_registerMenuCommand
@@ -16,42 +17,40 @@
 
 (function() {
     'use strict';
-    const logger = {
-        info: (...data) => console.log.apply(console, ['[sy]', ...data]),
-        warn: (...data) => console.warn.apply(console, ['[sy]', ...data]),
-        error: (...data) => console.error.apply(console, ['[sy]', ...data])
-    };
-
-    const modalReg = /\(modal:\w\/(\w+-?\w+)\/(\d+)\)/;
-    const youtubeReg = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/|live\/|playlist)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
+    var logger;
 
     const btns = [];
 
-    (function(history){
-        var pushState = history.pushState;
-        history.pushState = function(state, _, pathname) {
-            main('history', pathname);
-            return pushState.apply(history, arguments);
-        };
-        var replaceState = history.replaceState;
-        history.replaceState = function(state, _, pathname) {
-            main('history', pathname);
-            return replaceState.apply(history, arguments);
-        };
-    })(window.history);
+    window.addEventListener('su-loaded', () => {
+        logger = ShelterUtils.getLogger('youtube-link');
+        main('su-loaded', location.href);
+        logger.info('쉘터 글 유튜브 링크 스크립트 준비 완료');
+    });
 
-    function main(type, pathname) {
-        if (modalReg.test(pathname)) {
-            if (type == 'history') {
-                patchYoutubeLink();
-            } else {
-                wait(1150).then(patchYoutubeLink);
+    window.addEventListener('history', (event) => {
+        const { pathname } = event.detail;
+        main('history', pathname);
+    })
+
+    async function main(type, pathname) {
+        if (typeof ShelterUtils !== 'undefined') {
+            if (ShelterUtils.modalReg.test(pathname)) {
+                if (type == 'history') {
+                    patchYoutubeLink();
+                } else {
+                    ShelterUtils.wait(1150).then(patchYoutubeLink);
+                }
             }
         }
 
         if (type == 'script-injected') {
+            if (typeof ShelterUtils === 'undefined') {
+                const script = document.createElement('script');
+                script.classList.add('shelter-utils');
+                script.textContent = await fetch('https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-utils.js').then(r => r.text());
+                document.head.appendChild(script);
+            }
             initBtns();
-            logger.info('쉘터 글 유튜브 링크 스크립트 준비 완료');
         }
     }
 
@@ -91,7 +90,8 @@
     }
 
     function patchYoutubeLink() {
-        findDom('article.art_container .art_txt a[href*="youtu"]', true, (eles) => {
+        ShelterUtils.findDomAll('article.art_container .art_txt a[href*="youtu"]', (eles) => {
+            if (!eles) return;
             for (let ele of eles) {
                 if (ele.classList.contains('m-ypatch')) return;
                 let href = undefined;
@@ -100,7 +100,7 @@
                 } else {
                     href = ele.getAttribute('href');
                 }
-                if (href && youtubeReg.test(href)) {
+                if (href && ShelterUtils.youtubeReg.test(href)) {
                     let clone = ele.cloneNode(true);
                     ele.style.display = "none";
                     ele.classList.add('m-ypatch');
@@ -117,7 +117,7 @@
         try {
             let target = event.target;
             if (target.tagName != 'A') {
-                target = getDescendantByTag('A', target, 10);
+                target = ShelterUtils.getDescendant('A', target, 10);
             }
             if (!target) {
                 event.preventDefault();
@@ -140,7 +140,7 @@
 
             event.preventDefault();
             let url = new URL(href);
-            let match = href.match(youtubeReg);
+            let match = href.match(ShelterUtils.youtubeReg);
             let id = match[1];
             if (url.pathname.includes('playlist')) {
                 id = 'playlist';
@@ -164,7 +164,7 @@
 
     function addYoutubeEmbed(target, id, t, list) {
         let iframe = document.createElement('iframe');
-        let src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=${Number(isAutoplay())}&playsinline=1&start=${t}`;
+        let src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=${Number(isAutoplay())}&playsinline=1&start=${t.replace('s', '')}`;
         if (isAutoloop()) {
             src += `&loop=1&playlist=${id}`
         }
@@ -179,30 +179,6 @@
         iframe.setAttribute('width', '100%');
         iframe.style.aspectRatio = '16 / 9';
         target.appendChild(iframe);
-    }
-
-    async function findDom(path, all, callback) {
-        if (callback) {
-            let dom = all ? document.querySelectorAll(path) : document.querySelector(path);
-            if ((all ? dom.length != 0 : dom != null)) {
-                callback(dom);
-                return;
-            }
-        }
-        await wait(500);
-        return findDom(path, all, callback);
-    }
-
-    function getDescendantByTag(parent, child, limit = 5) {
-        var node = child.parentNode;
-        while (node != null) {
-            if (node.tagName == parent) {
-                return node;
-            }
-            if (limit-- == 0) return false;
-            node = node.parentNode;
-        }
-        return undefined;
     }
 
     function isAutoplay() {
@@ -235,10 +211,6 @@
         } else {
             return GM_getValue(k, d);
         }
-    }
-
-    function wait(ms) {
-        return new Promise((resolve) => setTimeout(resolve, ms));
     }
 
     main('script-injected', location.pathname);
