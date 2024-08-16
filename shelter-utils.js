@@ -255,4 +255,4 @@
     (unsafe ?? window).ShelterUtils = ShelterUtils;
     (unsafe ?? window).su = ShelterUtils;
 
-})(window, unsafeWindow);
+})(window, typeof unsafeWindow === 'undefined' ? undefined : unsafeWindow);
