@@ -6,6 +6,7 @@
 // @author       MaGyul
 // @match        *://shelter.id/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=shelter.id
+// @require      https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-utils.js
 // @updateURL    https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-hide-right-bar.user.js
 // @downloadURL  https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-hide-right-bar.user.js
 // @grant        GM_registerMenuCommand

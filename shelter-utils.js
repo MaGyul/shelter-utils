@@ -213,9 +213,10 @@
         });
         
         window.dispatchEvent(loadedEvent);
-        try {
+        if (document.body.contains(currentScript)) {
             document.body.removeChild(currentScript);
-        } catch {
+        }
+        if (document.head.contains(currentScript)) {
             document.head.removeChild(currentScript);
         }
     });

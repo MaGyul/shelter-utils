@@ -6,6 +6,7 @@
 // @author       MaGyul
 // @match        https://shelter.id/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=shelter.id
+// @require      https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-utils.js
 // @updateURL    https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-zoom-in-out.user.js
 // @downloadURL  https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-zoom-in-out.user.js
 // @grant        GM_setValue
