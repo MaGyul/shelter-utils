@@ -261,4 +261,4 @@
     window.ShelterUtils = ShelterUtils;
     window.su = ShelterUtils;
 
-})(window);
+})(typeof window === 'undefined' ? unsafeWindow : window);
