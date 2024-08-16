@@ -32,7 +32,7 @@
                     href = pathname.split('(')[0].replace(location.origin, '').substr(1);
                 }
                 if (href == undefined) {
-                    let canonical = await findDom('head > link[rel="canonical"]');
+                    let canonical = await this.findDom('head > link[rel="canonical"]');
                     href = canonical.href;
                 }
                 let split = href.replace(location.origin + '/', '').split('/');
