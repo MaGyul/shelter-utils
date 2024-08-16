@@ -1,14 +1,14 @@
-((window) => {
+((window, unsafe) => {
     const currentScript = document.currentScript;
-    window.domCache = {};
-    window.loggerCache = {};
+    (unsafe ?? window).domCache = {};
+    (unsafe ?? window).loggerCache = {};
     const logger = createLogger(console, 'shelter-utils');
 
     window.addEventListener('history', () => {
-        for (let key in window.domCache) {
-            let cache = window.domCache[key];
+        for (let key in domCache) {
+            let cache = domCache[key];
             if (document.body.contains(cache)) break;
-            delete window.domCache[key];
+            delete domCache[key];
         }
     });
 
@@ -17,10 +17,10 @@
         static youtubeReg = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/|live\/|playlist)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
 
         static getLogger(name) {
-            if (window.loggerCache[name]) {
-                return window.loggerCache[name];
+            if (loggerCache[name]) {
+                return loggerCache[name];
             } else {
-                return (window.loggerCache[name] = createLogger(console, name));
+                return (loggerCache[name] = createLogger(console, name));
             }
         }
 
@@ -100,23 +100,23 @@
                 callback = undefined;
             }
             if (typeof callback === 'function') {
-                if (window.domCache[path] && document.body.contains(window.domCache[path])) {
-                    callback(window.domCache[path]);
+                if (domCache[path] && document.body.contains(domCache[path])) {
+                    callback(domCache[path]);
                     return undefined;
                 }
                 let dom = document.querySelector(path);
                 if (dom != null) {
-                    window.domCache[path] = dom;
+                    domCache[path] = dom;
                     callback(dom);
                     return undefined;
                 }
             } else {
-                if (window.domCache[path] && document.body.contains(window.domCache[path])) {
-                    return window.domCache[path];
+                if (domCache[path] && document.body.contains(domCache[path])) {
+                    return domCache[path];
                 }
                 let dom = document.querySelector(path);
                 if (dom != null) {
-                    window.domCache[path] = dom;
+                    domCache[path] = dom;
                     return dom;
                 }
             }
@@ -198,17 +198,15 @@
     }
 
     window.addEventListener('load', () => {
-        window.ShelterUtils = ShelterUtils;
-        window.su = ShelterUtils;
-
-        const loadedEvent = new CustomEvent('su-loaded', {
+        (unsafe ?? window).ShelterUtils = ShelterUtils;
+        (unsafe ?? window).su = ShelterUtils;
+        
+        window.dispatchEvent(new CustomEvent('su-loaded', {
             bubbles: true,
             detail: {
                 su: ShelterUtils
             }
-        });
-        
-        window.dispatchEvent(loadedEvent);
+        }));
         if (document.body.contains(currentScript)) {
             document.body.removeChild(currentScript);
         }
@@ -254,7 +252,7 @@
         history.su_injected = true;
     })(window.history);
 
-    window.ShelterUtils = ShelterUtils;
-    window.su = ShelterUtils;
+    (unsafe ?? window).ShelterUtils = ShelterUtils;
+    (unsafe ?? window).su = ShelterUtils;
 
-})(typeof unsafeWindow === 'undefined' ? window : unsafeWindow);
+})(window, unsafeWindow);
