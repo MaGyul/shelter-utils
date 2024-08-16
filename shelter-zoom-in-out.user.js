@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         쉘터 글 줌인아웃
+// @name         쉘터 글 줌 인 아웃
 // @namespace    shelter.id
 // @version      1.0.0
 // @description  쉘터를 쓰는 노안들을 위한 확대 시스템

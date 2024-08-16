@@ -179,10 +179,12 @@
 
         static appendStyle(path) {
             const url = `https://raw.githubusercontent.com/MaGyul/shelter-utils/main/css/${path}`;
-            const style = document.createElement('link');
-            style.setAttribute('rel', 'stylesheet');
-            style.setAttribute('href', url);
-            document.head.appendChild(style);
+            // const style = document.createElement('link');
+            // style.setAttribute('rel', 'stylesheet');
+            // style.setAttribute('href', url);
+            fetch(url).then(r => r.text()).then(css => {
+                document.head.appendChild(this.createStyle(css));
+            })
         }
 
         static wait(ms) {
