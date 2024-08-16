@@ -213,7 +213,11 @@
         });
         
         window.dispatchEvent(loadedEvent);
-        document.body.removeChild(currentScript);
+        try {
+            document.body.removeChild(currentScript);
+        } catch {
+            document.head.removeChild(currentScript);
+        }
     });
 
     (function(history){
