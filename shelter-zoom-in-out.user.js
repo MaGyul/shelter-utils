@@ -41,7 +41,7 @@
                     input.max = '200';
                     input.type = 'range';
                     input.step = '10';
-                    input.value = value;
+                    input.value = value * 100;
                     input.addEventListener('input', async () => {
                         setValue('noan-zoom', input.value / 100)
                         modal.style.setProperty('--noan-zoom', `${input.value / 100}`);
