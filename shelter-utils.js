@@ -84,7 +84,7 @@
                 }
                 return [];
             }
-            await wait(500);
+            await this.wait(500);
             return this.findDomAll(path, callback, limit);
         }
 
