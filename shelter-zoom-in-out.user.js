@@ -16,10 +16,9 @@
     'use strict';
     var logger;
 
-    window.addEventListener('su-loaded', (event) => {
-        const { su } = event.detail;
-        logger = su.getLogger('zoom-in-out');
-        su.appendStyle('zoom-in-out.style');
+    window.addEventListener('su-loaded', () => {
+        logger = ShelterUtils.getLogger('zoom-in-out');
+        ShelterUtils.appendStyle('zoom-in-out.style');
         main('su-loaded', location.href);
     });
 
@@ -29,10 +28,11 @@
     })
 
     async function main(type, pathname) {
-        if (typeof window.ShelterUtils !== 'undefined') {
+        if (typeof ShelterUtils !== 'undefined') {
             if (ShelterUtils.modalReg.test(pathname)) {
+                const value = getValue('noan-zoom', 1);
                 const modal = await ShelterUtils.findDom('body > app-root > ng-component > app-modal-wrapper');
-                modal.style.setProperty('--noan-zoom', `${getValue('noan-zoom', 1)}`);
+                modal.style.setProperty('--noan-zoom', `${value}`);
                 const dom = await ShelterUtils.findDom('div.modal-ref-list > div.ref-scroll-container')
                 if (!dom.querySelector('& input.zoom-in-out')) {
                     const input = document.createElement('input');
@@ -41,7 +41,7 @@
                     input.max = '200';
                     input.type = 'range';
                     input.step = '10';
-                    input.value = '100';
+                    input.value = value;
                     input.addEventListener('input', async () => {
                         setValue('noan-zoom', input.value / 100)
                         modal.style.setProperty('--noan-zoom', `${input.value / 100}`);
@@ -52,7 +52,7 @@
         }
 
         if (type === 'script-injected') {
-            if (typeof window.ShelterUtils === 'undefined') {
+            if (typeof ShelterUtils === 'undefined') {
                 const script = document.createElement('script');
                 script.textContent = await fetch('https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-utils.js').then(r => r.text());
                 document.body.appendChild(script);

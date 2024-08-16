@@ -7,7 +7,7 @@
     text-overflow: ellipsis;
 }
 
-.art_txt {
+.art_txt, simple-notice-detail-container > div.word-break-all {
     zoom: var(--noan-zoom);
 }
 
