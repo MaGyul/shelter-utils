@@ -183,7 +183,6 @@
             // style.setAttribute('rel', 'stylesheet');
             // style.setAttribute('href', url);
             fetch(url).then(r => r.text()).then(css => {
-                logger.info(css);
                 document.head.appendChild(this.createStyle(css));
             })
         }
@@ -204,7 +203,7 @@
     window.addEventListener('load', () => {
         window.ShelterUtils = ShelterUtils;
         window.su = ShelterUtils;
-        
+
         const loadedEvent = new CustomEvent('su-loaded', {
             bubbles: true,
             detail: {
