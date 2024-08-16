@@ -202,6 +202,9 @@
     }
 
     window.addEventListener('load', () => {
+        window.ShelterUtils = ShelterUtils;
+        window.su = ShelterUtils;
+        
         const loadedEvent = new CustomEvent('su-loaded', {
             bubbles: true,
             detail: {

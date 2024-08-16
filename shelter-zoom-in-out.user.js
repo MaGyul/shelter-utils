@@ -6,7 +6,6 @@
 // @author       MaGyul
 // @match        https://shelter.id/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=shelter.id
-// @require      https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-utils.js
 // @updateURL    https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-zoom-in-out.user.js
 // @downloadURL  https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-zoom-in-out.user.js
 // @grant        GM_setValue
@@ -17,9 +16,10 @@
     'use strict';
     var logger;
 
-    window.addEventListener('su-loaded', () => {
-        logger = window.ShelterUtils.getLogger('zoom-in-out');
-        window.ShelterUtils.appendStyle('zoom-in-out.style');
+    window.addEventListener('su-loaded', (event) => {
+        const { su } = event.detail;
+        logger = su.getLogger('zoom-in-out');
+        su.appendStyle('zoom-in-out.style');
         main('su-loaded', location.href);
     });
 
@@ -54,7 +54,7 @@
         if (type === 'script-injected') {
             if (typeof window.ShelterUtils === 'undefined') {
                 const script = document.createElement('script');
-                script.setAttribute('src', 'https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-utils.js');
+                script.textContent = await fetch('https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-utils.js').then(r => r.text());
                 document.body.appendChild(script);
             }
         }
