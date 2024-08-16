@@ -9,7 +9,8 @@
 // @require      https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-utils.js
 // @updateURL    https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-zoom-in-out.user.js
 // @downloadURL  https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-zoom-in-out.user.js
-// @grant        none
+// @grant        GM_setValue
+// @grant        GM_getValue
 // ==/UserScript==
 
 (function() {
@@ -30,6 +31,8 @@
     async function main(type, pathname) {
         if (typeof window.ShelterUtils !== 'undefined') {
             if (ShelterUtils.modalReg.test(pathname)) {
+                const modal = await ShelterUtils.findDom('body > app-root > ng-component > app-modal-wrapper');
+                modal.style.setProperty('--noan-zoom', `${getValue('noan-zoom', 1)}`);
                 const dom = await ShelterUtils.findDom('div.modal-ref-list > div.ref-scroll-container')
                 if (!dom.querySelector('& input.zoom-in-out')) {
                     const input = document.createElement('input');
@@ -39,8 +42,9 @@
                     input.type = 'range';
                     input.step = '10';
                     input.value = '100';
-                    input.addEventListener('change', () => {
-                        logger.info(input.value);
+                    input.addEventListener('input', async () => {
+                        setValue('noan-zoom', input.value / 100)
+                        modal.style.setProperty('--noan-zoom', `${input.value / 100}`);
                     });
                     dom.appendChild(input);
                 }
@@ -53,6 +57,22 @@
                 script.setAttribute('src', 'https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-utils.js');
                 document.body.appendChild(script);
             }
+        }
+    }
+
+    function setValue(k, v) {
+        if (typeof GM_setValue === 'undefined') {
+            localStorage.setItem(k, v);
+        } else {
+            return GM_setValue(k, v);
+        }
+    }
+
+    function getValue(k, d) {
+        if (typeof GM_getValue === 'undefined') {
+            return localStorage.getItem(k) ?? d;
+        } else {
+            return GM_getValue(k, d);
         }
     }
 

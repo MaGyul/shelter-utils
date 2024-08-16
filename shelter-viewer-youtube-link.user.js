@@ -1,14 +1,17 @@
 // ==UserScript==
 // @name         쉘터 글 유튜브 링크
 // @namespace    shelter.id
-// @version      1.2.1
+// @version      1.2.2
 // @description  쉘터 글 유튜브에 연결된 링크 클릭시 유튜브 Embed 생성
 // @author       MaGyul
 // @match        *://shelter.id/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=shelter.id
 // @updateURL    https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-viewer-youtube-link.user.js
 // @downloadURL  https://raw.githubusercontent.com/MaGyul/shelter-utils/main/shelter-viewer-youtube-link.user.js
-// @grant        none
+// @grant        GM_registerMenuCommand
+// @grant        GM_unregisterMenuCommand
+// @grant        GM_setValue
+// @grant        GM_getValue
 // ==/UserScript==
 
 (function() {
