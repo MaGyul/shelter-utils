@@ -183,6 +183,7 @@
             // style.setAttribute('rel', 'stylesheet');
             // style.setAttribute('href', url);
             fetch(url).then(r => r.text()).then(css => {
+                logger.info(css);
                 document.head.appendChild(this.createStyle(css));
             })
         }

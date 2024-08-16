@@ -19,7 +19,7 @@
 
     window.addEventListener('su-loaded', () => {
         logger = window.ShelterUtils.getLogger('zoom-in-out');
-        window.ShelterUtils.appendStyle('zoom-in-out.css');
+        window.ShelterUtils.appendStyle('zoom-in-out.style');
         main('su-loaded', location.href);
     });
 
