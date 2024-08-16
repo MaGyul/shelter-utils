@@ -32,6 +32,7 @@
     var observer = undefined;
 
     window.addEventListener('su-loaded', () => {
+        logger = ShelterUtils.getLogger('show-datetime');
         main('su-loaded', location.href);
     });
 
