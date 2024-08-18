@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         쉘터 글 줌 인 아웃
 // @namespace    shelter.id
-// @version      1.0.0
+// @version      1.0.1
 // @description  쉘터를 쓰는 노안들을 위한 확대 시스템
 // @author       MaGyul
 // @match        *://shelter.id/*
@@ -32,7 +32,7 @@
         if (typeof ShelterUtils !== 'undefined') {
             if (ShelterUtils.modalReg.test(pathname)) {
                 const value = getValue('noan-zoom', 1);
-                const modal = await ShelterUtils.findDom('body > app-root > ng-component > app-modal-wrapper');
+                let modal = await ShelterUtils.findDom('body > app-root > ng-component > app-modal-wrapper');
                 modal.style.setProperty('--noan-zoom', `${value}`);
                 const dom = await ShelterUtils.findDom('div.modal-ref-list > div.ref-scroll-container')
                 if (!dom.querySelector('& input.zoom-in-out')) {
@@ -44,6 +44,7 @@
                     input.step = '10';
                     input.value = value * 100;
                     input.addEventListener('input', async () => {
+                        let modal = await ShelterUtils.findDom('body > app-root > ng-component > app-modal-wrapper');
                         setValue('noan-zoom', input.value / 100)
                         modal.style.setProperty('--noan-zoom', `${input.value / 100}`);
                     });
