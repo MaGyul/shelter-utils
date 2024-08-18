@@ -2,15 +2,19 @@
     display: flex;
 }
 
-.ref-box, .ref-item:first-child {
+.ref-box, 
+.ref-item:first-child {
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.art_txt, .simple-notice-detail-container > div.word-break-all {
-    zoom: var(--noan-zoom);
+.comment-content-container .art_txt,
+.art_txt > p:not(:has(.video-js)),
+.simple-notice-detail-container > div.word-break-all {
+	zoom: var(--noan-zoom);
 }
 
-app-modal-wrapper > app-shelter-modal-navigator > div > div.modal-ref-list > div.ref-scroll-container > input[type=range] {
+input.zoom-in-out {
     margin-left: 10px;
+    cursor: pointer;
 }
