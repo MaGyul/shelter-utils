@@ -10,6 +10,7 @@
 
 .comment-content-container .art_txt,
 .art_txt > p:not(:has(.video-js)),
+.art_txt > div:not(:has(.video-js)),
 .simple-notice-detail-container > div.word-break-all {
 	zoom: var(--noan-zoom);
 }
