@@ -78,10 +78,10 @@
 [GNU GPL 3.0](LICENSE)
 
 [show-datetime-download]: https://github.com/MaGyul/shelter-utils/raw/main/shelter-show-datetime.user.js
-[show-datetime-source]: shelter-show-datetime.user.js
+[show-datetime-source]: https://github.com/MaGyul/shelter-utils/blob/main/shelter-show-datetime.user.js
 [hide-right-bar-download]: https://github.com/MaGyul/shelter-utils/raw/main/shelter-hide-right-bar.user.js
-[hide-right-bar-source]: shelter-hide-right-bar.user.js
+[hide-right-bar-source]: https://github.com/MaGyul/shelter-utils/blob/main/shelter-hide-right-bar.user.js
 [viewer-youtube-link-download]: https://github.com/MaGyul/shelter-utils/raw/main/shelter-viewer-youtube-link.user.js
-[viewer-youtube-link-source]: shelter-viewer-youtube-link.user.js
+[viewer-youtube-link-source]: https://github.com/MaGyul/shelter-utils/blob/main/shelter-viewer-youtube-link.user.js
 [zoom-in-out-download]: https://github.com/MaGyul/shelter-utils/raw/main/shelter-zoom-in-out.user.js
-[zoom-in-out-source]: shelter-zoom-in-out.user.js
+[zoom-in-out-source]: https://github.com/MaGyul/shelter-utils/blob/main/shelter-zoom-in-out.user.js
