@@ -39,9 +39,7 @@
 
 [Download][hide-right-bar-download] | [Source][hide-right-bar-source]
 
-<p align="left">
-  <img height="500" src="https://github.com/user-attachments/assets/3160d912-15c7-49e1-95e5-e82515f066d7">
-</p>
+![image](https://github.com/user-attachments/assets/3160d912-15c7-49e1-95e5-e82515f066d7)
 
 > [!Note]
 > ![image](https://github.com/user-attachments/assets/2ee0e5b7-ed78-4e49-930a-7d5701d54c62)
