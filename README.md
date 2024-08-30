@@ -4,7 +4,7 @@
 <br>
 
 <p align="left">
-  <a href="#Show DateTime (날자 및 시간 표시)">Show DateTime (날자 및 시간 표시)</a><br>
+  <a href="#show-datetime-%EB%82%A0%EC%9E%90-%EB%B0%8F-%EC%8B%9C%EA%B0%84-%ED%91%9C%EC%8B%9C">Show DateTime (날자 및 시간 표시)</a><br>
   <a href="#Hide Right Bar (오른쪽 바 숨기기)">Hide Right Bar (오른쪽 바 숨기기)</a><br>
   <a href="#Viewer Youtube Link (글 내용 유튜브 링크)">Viewer Youtube Link (글 내용 유튜브 링크)</a><br>
   <a href="#Zoom In Out (줌 인 아웃)">Zoom In Out (줌 인 아웃)</a>
