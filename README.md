@@ -48,7 +48,7 @@
 > 상단 오른쪽에 생긴 ◀ or ▶ 버튼을 눌러 열고 닫을 수 있습니다.
 
 > [!Tip]
-> 해당 버튼으로 오른쪽 바가 없어져서 비어버린 양 사이드 빈 공간을 꽉 채워버립니다.[1]
+> 해당 버튼으로 오른쪽 바가 없어져서 비어버린 양 사이드 빈 공간을 꽉 채워버립니다.
 > <p align="left">
 >   <img align="top" src="https://github.com/user-attachments/assets/a114cc73-4b54-4043-82c2-ae9b35b9a4f1">
 >   <img width="300" src="https://github.com/user-attachments/assets/0b6eaba7-520b-4767-a08a-a78dbe75f396">
