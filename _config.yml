@@ -1,0 +1,8 @@
+remote_theme: pages-themes/cayman@v0.2.0
+plugins:
+- jekyll-remote-theme # add this line to the plugins list if you already have one
+
+title: Shelter Utils (쉘터 유틸)
+description: 쉘터를 쓰면서 유용한 유저 스크립트
+
+show_downloads: false
