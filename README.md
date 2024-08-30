@@ -5,13 +5,10 @@
 > **대충 쓴 글이라 가독성이 떨어짐**
 
 ## 목차
-
-<p align="left">
-  <a href="#show-datetime-날자-및-시간-표시">Show DateTime (날자 및 시간 표시)</a><br>
-  <a href="#hide-right-bar-오른쪽-바-숨기기">Hide Right Bar (오른쪽 바 숨기기)</a><br>
-  <a href="#viewer-youtube-link-글-내용-유튜브-링크">Viewer Youtube Link (글 내용 유튜브 링크)</a><br>
-  <a href="#zoom-in-out-줌-인-아웃">Zoom In Out (줌 인 아웃)</a>
-</p>
+- [Show DateTime (날자 및 시간 표시)](#show-datetime-날자-및-시간-표시)
+- [Hide Right Bar (오른쪽 바 숨기기)](#hide-right-bar-오른쪽-바-숨기기)
+- [Viewer Youtube Link (글 내용 유튜브 링크)](#viewer-youtube-link-글-내용-유튜브-링크)
+- [Zoom In Out (줌 인 아웃)](#zoom-in-out-줌-인-아웃)
 
 ## Show DateTime (날자 및 시간 표시)
 [Download][show-datetime-download] | [Source][show-datetime-source]
