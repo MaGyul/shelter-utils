@@ -1,14 +1,14 @@
 # Shelter Utils (쉘터 유틸)
 쉘터를 쓰면서 유용한 유저 스크립트
 ### 주의: 대충 쓴 글이라 가독성이 떨어짐
-<br>
+
+## 목차
 
 <p align="left">
-  <p>이동</p>
-  <a href="#show-datetime-(날자-및-시간-표시)">Show DateTime (날자 및 시간 표시)</a><br>
-  <a href="#hide-right-bar-(오른쪽-바-숨기기)">Hide Right Bar (오른쪽 바 숨기기)</a><br>
-  <a href="#viewer-youtube-link-(글-내용-유튜브-링크)">Viewer Youtube Link (글 내용 유튜브 링크)</a><br>
-  <a href="#zoom-in-out-(줌-인-아웃)">Zoom In Out (줌 인 아웃)</a>
+  <a href="#show-datetime-날자-및-시간-표시">Show DateTime (날자 및 시간 표시)</a><br>
+  <a href="#hide-right-bar-오른쪽-바-숨기기">Hide Right Bar (오른쪽 바 숨기기)</a><br>
+  <a href="#viewer-youtube-link-글-내용-유튜브-링크">Viewer Youtube Link (글 내용 유튜브 링크)</a><br>
+  <a href="#zoom-in-out-줌-인-아웃">Zoom In Out (줌 인 아웃)</a>
 </p>
 
 ## Show DateTime (날자 및 시간 표시)
@@ -55,3 +55,5 @@
   <img width="450" align="top" src="https://github.com/user-attachments/assets/f32f1211-6dc0-4c67-827a-84f1042a2be2">
 </p>
 
+## LICENSE
+[GNU GPL 3.0](https://www.gnu.org/licenses/gpl-3.0.txt)
