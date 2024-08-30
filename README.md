@@ -1,6 +1,9 @@
 # Shelter Utils (쉘터 유틸)
 쉘터를 쓰면서 유용한 유저 스크립트
 
+[![license](https://img.shields.io/badge/license-GNU%20GPL%203.0-green)](LICENSE)
+[![shelter](https://img.shields.io/badge/site-shelter.io-blue)](https://shelter.id/)
+
 > [!Warning]
 > **대충 쓴 글이라 가독성이 떨어짐**
 
@@ -72,7 +75,7 @@
 </p>
 
 ## LICENSE
-[GNU GPL 3.0](https://www.gnu.org/licenses/gpl-3.0.txt)
+[GNU GPL 3.0](LICENSE)
 
 [show-datetime-download]: https://github.com/MaGyul/shelter-utils/raw/main/shelter-show-datetime.user.js
 [show-datetime-source]: shelter-show-datetime.user.js
