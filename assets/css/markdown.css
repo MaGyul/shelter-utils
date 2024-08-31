@@ -19,6 +19,11 @@
     --base-size-112: 7rem;
     --base-size-128: 8rem;
 
+    --base-text-weight-light: 300;
+    --base-text-weight-normal: 400;
+    --base-text-weight-medium: 500;
+    --base-text-weight-semibold: 600;
+
     --important-color: #8957e5;
     --note-color: #1f6feb;
     --tip-color: #238636;
@@ -56,6 +61,13 @@
 
 .markdown-alert.markdown-alert-warning .markdown-alert-title {
     color: var(--warning-color);
+}
+
+.markdown-alert .markdown-alert-title {
+    display: flex;
+    font-weight: var(--base-text-weight-medium, 500);
+    align-items: center;
+    line-height: 1;
 }
 
 .markdown-alert {
