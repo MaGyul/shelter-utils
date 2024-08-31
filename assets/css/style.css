@@ -1,2 +1,2 @@
 @import "{{ site.theme }}";
-@import "./markdown.scss";
+@import "./markdown.css";
