@@ -28,34 +28,34 @@
 
 .markdown-alert.markdown-alert-important {
     border-left-color: var(--important-color);
+}
 
-    .markdown-alert-title {
-        color: var(--important-color);
-    }
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+    color: var(--important-color);
 }
 
 .markdown-alert.markdown-alert-tip {
     border-left-color: var(--tip-color);
+}
 
-    .markdown-alert-title {
-        color: var(--tip-color);
-    }
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+    color: var(--tip-color);
 }
 
 .markdown-alert.markdown-alert-note {
     border-left-color: var(--note-color);
+}
 
-    .markdown-alert-title {
-        color: var(--note-color);
-    }
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+    color: var(--note-color);
 }
 
 .markdown-alert.markdown-alert-warning {
     border-left-color: var(--warning-color);
+}
 
-    .markdown-alert-title {
-        color: var(--warning-color);
-    }
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+    color: var(--warning-color);
 }
 
 .markdown-alert {
