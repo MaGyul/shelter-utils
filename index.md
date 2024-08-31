@@ -1,7 +1,7 @@
 # Shelter Utils (쉘터 유틸)
 쉘터를 쓰면서 유용한 유저 스크립트
 
-[![license](https://img.shields.io/badge/license-GNU%20GPL%203.0-green)](LICENSE)
+[![license](https://img.shields.io/badge/license-GNU%20GPL%203.0-green)][license-link]
 [![shelter](https://img.shields.io/badge/site-shelter.io-blue)](https://shelter.id/)
 
 <div class="markdown-alert markdown-alert-warning" dir="auto">
@@ -29,16 +29,16 @@
 
 **날자가 목록에선 이런식으로 표시되고**
 
-![image](https://github.com/user-attachments/assets/9f144ff3-9494-4773-a2d2-8018baa6dd6e)
-![image](https://github.com/user-attachments/assets/9698866b-0174-4533-b09d-95d66bd90e3b)
+![image](assets/image/show-datetime/time.png)
+![image](assets/image/show-datetime/date.png)
 
 **글 읽을땐 이렇게 표시되며**
 
-![image](https://github.com/user-attachments/assets/20f650fe-f86b-45cd-8b87-652ed0b4aa05)
+![image](assets/image/show-datetime/viewer.png)
 
 **글 목록 상단에 이런식으로 페이지 버튼과 검색 버튼이 표시됩니다.**
 
-![image](https://github.com/user-attachments/assets/9d7481ba-5db5-40e6-aa4f-140e0d7ece7e)
+![image](assets/image/show-datetime/top.png)
 <br>
 
 ## Hide Right Bar (오른쪽 바 숨기기)
@@ -103,6 +103,7 @@
 ## LICENSE
 [GNU GPL 3.0](LICENSE)
 
+[license-link]: https://github.com/MaGyul/shelter-utils/blob/main/LICENSE
 [show-datetime-download]: https://github.com/MaGyul/shelter-utils/raw/main/shelter-show-datetime.user.js
 [show-datetime-source]: https://github.com/MaGyul/shelter-utils/blob/main/shelter-show-datetime.user.js
 [hide-right-bar-download]: https://github.com/MaGyul/shelter-utils/raw/main/shelter-hide-right-bar.user.js
