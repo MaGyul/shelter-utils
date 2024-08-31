@@ -1,3 +1,6 @@
-@import "./cayman.css";
-@import "./normalize.css";
+@import 'jekyll-theme-cayman';
 @import "./markdown.css?v=1";
+
+a#skip-to-content {
+    display: none;
+}
