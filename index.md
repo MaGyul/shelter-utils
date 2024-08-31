@@ -47,7 +47,7 @@
 
 **쉘터를 쓰면서 오른쪽 바가 불 필요하다고 느낀다면 있으면 좋은 스크립트**
 
-![image](https://github.com/user-attachments/assets/3160d912-15c7-49e1-95e5-e82515f066d7)
+![image](assets/image/hide-right-bar/base.png)
 
 <div class="markdown-alert markdown-alert-note" dir="auto">
   <p class="markdown-alert-title" dir="auto">
@@ -55,8 +55,8 @@
     Note
   </p>
   <p dir="auto">
-    <img src="https://github.com/user-attachments/assets/2ee0e5b7-ed78-4e49-930a-7d5701d54c62" alt="image" style="max-width: 100%;">
-    <img src="https://github.com/user-attachments/assets/3b8852b9-c466-4c6d-886c-2d201ab7d8c7" alt="image" style="max-width: 100%;">
+    <img src="assets/image/hide-right-bar/top-right.png" alt="image" style="max-width: 100%;">
+    <img src="assets/image/hide-right-bar/banner-right.png" alt="image" style="max-width: 100%;">
   </p>
   <p dir="auto">상단 오른쪽에 생긴 ◀ or ▶ 버튼을 눌러 열고 닫을 수 있습니다.</p>
 </div>
@@ -68,8 +68,8 @@
   </p>
   <p dir="auto">해당 버튼으로 오른쪽 바가 없어져서 비어버린 양 사이드 빈 공간을 꽉 채워버립니다.</p>
   <p align="left" dir="auto">
-    <img align="top" src="https://github.com/user-attachments/assets/a114cc73-4b54-4043-82c2-ae9b35b9a4f1" style="max-width: 100%;">
-    <img width="300" src="https://github.com/user-attachments/assets/0b6eaba7-520b-4767-a08a-a78dbe75f396" style="max-width: 100%;">
+    <img align="top" src="assets/image/hide-right-bar/script-setting.png" alt="image" style="max-width: 100%;">
+    <img width="300" src="assets/image/hide-right-bar/toggle-full.png" alt="image" style="max-width: 100%;">
   </p>
 </div>
 
@@ -79,7 +79,18 @@
 
 **글 내용에 유튜브 링크가 있을경우 링크 클릭시 유튜브로 이동이 아닌 글 안에 유튜브 임배드가 생성됩니다.**
 
-![image](https://github.com/user-attachments/assets/dc91acc4-86ee-4e87-a7e5-126245e19b3c)
+![image](assets/image/viewer-youtube-link/base.gif)
+
+<div class="markdown-alert markdown-alert-tip" dir="auto">
+  <p class="markdown-alert-title" dir="auto">
+    <svg class="octicon octicon-light-bulb mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>
+    Tip
+  </p>
+  <p dir="auto">해당 버튼들로 유튜브 임배드를 만들때 자동으로 셋팅되는 옵션을 설정할 수 있습니다. (기본값: 꺼짐)</p>
+  <p align="left" dir="auto">
+    <img src="assets/image/viewer-youtube-link/script-setting.png" alt="image" style="max-width: 100%;">
+  </p>
+</div>
 
 ## Zoom In Out (줌 인 아웃)
 
@@ -96,8 +107,8 @@
 </div>
 
 <p align="left">
-  <img width="450" src="https://github.com/user-attachments/assets/7d62f80c-d9cc-4a8a-913e-555ea9cedc47">
-  <img width="450" align="top" src="https://github.com/user-attachments/assets/f32f1211-6dc0-4c67-827a-84f1042a2be2">
+  <img width="450" alt="image" src="assets/image/zoom-in-out/mouse.gif">
+  <img width="450" align="top" alt="image" src="assets/image/zoom-in-out/keyboard.gif">
 </p>
 
 ## LICENSE
