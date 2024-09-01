@@ -62,7 +62,9 @@
             });
         });
         if (location.hash) {
-            location.href = location.hash;
+            document.addEventListener('load', () => {
+                location.href = location.hash;
+            });
         }
     </script>
   </body>
