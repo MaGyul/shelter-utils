@@ -61,6 +61,9 @@
                 open(this.href);
             });
         });
+        if (location.hash) {
+            location.href = location.hash;
+        }
     </script>
   </body>
 </html>
