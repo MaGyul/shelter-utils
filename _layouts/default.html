@@ -28,14 +28,6 @@
             contrast: 90,
             sepia: 10
         });
-        document.addEventListener('load', () => {
-            document.querySelectorAll('a[href^="http"]').forEach(ele => {
-                ele.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    open(this.href);
-                });
-            });
-        });
     </script>
     {% endunless %}
   </head>
@@ -62,5 +54,13 @@
         {% endif %}
       </footer>
     </main>
+    <script>
+        document.querySelectorAll('a[href^="http"]').forEach(ele => {
+            ele.addEventListener('click', function(event) {
+                event.preventDefault();
+                open(this.href);
+            });
+        });
+    </script>
   </body>
 </html>
