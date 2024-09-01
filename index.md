@@ -112,7 +112,8 @@
 </p>
 
 ## LICENSE
-[GNU GPL 3.0](LICENSE)
+
+[GNU GPL 3.0][license-link]
 
 [license-link]: https://github.com/MaGyul/shelter-utils/blob/main/LICENSE
 [show-datetime-download]: https://github.com/MaGyul/shelter-utils/raw/main/shelter-show-datetime.user.js
