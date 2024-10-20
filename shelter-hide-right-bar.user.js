@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         쉘터 오른쪽 사이드바 가리기
 // @namespace    shelter.id
-// @version      1.0.6
+// @version      1.0.7
 // @description  오른쪽 사이드바를 접거나 펼칠 수 있습니다.
 // @author       MaGyul
 // @match        *://shelter.id/*
@@ -57,7 +57,7 @@
 
         if (type == 'su-loaded' || type == 'history') {
             await ShelterUtils.wait(1000);
-            ShelterUtils.findDom('.main__layout__container > .main__layout div.board__header.font-label > div.header-right', dom => {
+            ShelterUtils.findDom('app-shelter-community-page-board > app-board-list-container > ngx-pull-to-refresh > div > div.ngx-ptr-content-container > div.board__header.ng-star-inserted > div', dom => {
                 if (!dom) return;
                 if (!dom.contains(btn)) {
                     dom.appendChild(btn);
