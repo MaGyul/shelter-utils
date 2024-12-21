@@ -1,8 +1,8 @@
-((window, unsafe) => {
-    if ((unsafe ?? window).su_injected) return;
+(($win) => {
+    if ($win.su_injected) return;
     const currentScript = document.currentScript;
-    (unsafe ?? window).domCache = {};
-    (unsafe ?? window).loggerCache = {};
+    $win.domCache = {};
+    $win.loggerCache = {};
     const logger = createLogger(console, 'shelter-utils');
 
     window.addEventListener('history', () => {
@@ -197,9 +197,9 @@
         };
     }
 
-    (unsafe ?? window).shelterUtilsLoad = () => {
-        (unsafe ?? window).ShelterUtils = ShelterUtils;
-        (unsafe ?? window).su = ShelterUtils;
+    $win.shelterUtilsLoad = () => {
+        $win.ShelterUtils = ShelterUtils;
+        $win.su = ShelterUtils;
         
         window.dispatchEvent(new CustomEvent('su-loaded', {
             bubbles: true,
@@ -213,11 +213,11 @@
         if (document.head.contains(currentScript)) {
             document.head.removeChild(currentScript);
         }
-        window.removeEventListener('load', (unsafe ?? window).shelterUtilsLoad);
-        delete (unsafe ?? window).shelterUtilsLoad;
+        window.removeEventListener('load', $win.shelterUtilsLoad);
+        delete $win.shelterUtilsLoad;
     }
-    window.removeEventListener('load', (unsafe ?? window).shelterUtilsLoad);
-    window.addEventListener('load', (unsafe ?? window).shelterUtilsLoad);
+    window.removeEventListener('load', $win.shelterUtilsLoad);
+    window.addEventListener('load', $win.shelterUtilsLoad);
 
     (function(history){
         if (history.su_injected) return;
@@ -256,8 +256,8 @@
         history.su_injected = true;
     })(window.history);
 
-    (unsafe ?? window).ShelterUtils = ShelterUtils;
-    (unsafe ?? window).su = ShelterUtils;
+    $win.ShelterUtils = ShelterUtils;
+    $win.su = ShelterUtils;
 
-    (unsafe ?? window).su_injected = true;
-})(window, typeof unsafeWindow === 'undefined' ? undefined : unsafeWindow);
+    window.su_injected = true;
+})(typeof unsafeWindow !== 'undefined' ? unsafeWindow : window);
